@@ -5,4 +5,9 @@ COPY tsconfig.json ./
 RUN npm install
 COPY src ./src
 RUN npx tsc
+
+RUN adduser --no-create-home --group --disabled-login --system www
+RUN chown www -R /usr/src/app
+USER www
+
 CMD node build/index.js 

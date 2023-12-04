@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+
+  wik_dps_tp02:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    
+
+    deploy:
+      replicas: 4
+
+    restart: always
+
+    networks:
+      - front-networks
+
+  proxy:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+
+    ports:
+    - 8080:80
+    
+    depends_on:
+      - wik_dps_tp02
+
+    networks:
+      - front-networks
+
+
+networks:
+  front-networks:
