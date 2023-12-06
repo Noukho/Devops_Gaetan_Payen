@@ -13,9 +13,6 @@ services:
 
     restart: always
 
-    environment:
-      - PING_LISTEN_PORT=8000
-
     networks:
       - front-networks
 
